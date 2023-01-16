@@ -1,42 +1,38 @@
 import './App.css';
+import randomColor from 'randomcolor';
 import { useState } from 'react';
 
-const useGenerateRandomColor = () => {
-  const [color, setColor] = useState('');
-  const generateColor = () => {
-    setColor(Math.random().toString(16).substr(-6));
-  };
-  return { color, generateColor };
-};
+const RandomColor = () => {
+  const [color, setColor] = useState('#000');
 
-function App() {
-  const { color, generateColor } = useGenerateRandomColor();
+  const getRgb = () => Math.floor(Math.random() * 256);
+
+  const rgbToHex = (r, g, b) =>
+    '#' +
+    [r, g, b]
+      .map((x) => {
+        const hex = x.toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
+      })
+      .join('');
+
+  const handleGenerate = () => {
+    const color = {
+      r: getRgb(),
+      g: getRgb(),
+      b: getRgb(),
+    };
+
+    setColor(rgbToHex(color.r, color.g, color.b));
+  };
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        width: '100vw',
-        backgroundColor: '#' + color,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <button
-        style={{
-          padding: '50px',
-          borderRadius: '1000px',
-          backgroundImage:
-            'linear-gradient(to top, #' + color + ' 0%, #FFFFFF 80%)',
-          fontSize: 'larger',
-        }}
-        onClick={generateColor}
-      >
-        Generate <br />
-        {'#' + color}
+    <div style={{ backgroundColor: color }} className="container">
+      <button style={{ color: color }} onClick={handleGenerate}>
+        {color} <br />
       </button>
     </div>
   );
-}
+};
 
-export default App;
+export default RandomColor;
