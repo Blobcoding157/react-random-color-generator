@@ -1,5 +1,4 @@
 import './App.css';
-import randomColor from 'randomcolor';
 import { useState } from 'react';
 
 const RandomColor = () => {
@@ -17,13 +16,13 @@ const RandomColor = () => {
       .join('');
 
   const handleGenerate = () => {
-    const color = {
+    const colors = {
       r: getRgb(),
       g: getRgb(),
       b: getRgb(),
     };
 
-    setColor(rgbToHex(color.r, color.g, color.b));
+    setColor(rgbToHex(colors.r, colors.g, colors.b));
   };
 
   return (
