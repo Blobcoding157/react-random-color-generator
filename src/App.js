@@ -1,10 +1,20 @@
 import './App.css';
 import { useState } from 'react';
+import bwomp from './bwomp.mp3';
 
 const RandomColor = () => {
   const [color, setColor] = useState('#000');
 
   const getRgb = () => Math.floor(Math.random() * 256);
+
+  // this sound is here to represent my sadness, for drone not to recognize my "Generate"
+  const audio = new Audio(bwomp);
+
+  const start = () => {
+    audio.play().catch((error) => {
+      console.error(error);
+    });
+  };
 
   const rgbToHex = (r, g, b) =>
     '#' +
@@ -27,8 +37,16 @@ const RandomColor = () => {
 
   return (
     <div style={{ backgroundColor: color }} className="container">
-      <button style={{ color: color }} onClick={handleGenerate}>
-        Generate <br /> {color}
+      <button
+        style={{ color: color }}
+        onClick={() => {
+          handleGenerate();
+          start();
+        }}
+      >
+        Generate
+        <br />
+        {color}
       </button>
     </div>
   );
