@@ -1,8 +1,16 @@
 import './App.css';
-import somewhatUsefulFunctions from './somewhatUsefulFunctions';
+import { useState } from 'react';
+
+const useGenerateRandomColor = () => {
+  const [color, setColor] = useState('');
+  const generateColor = () => {
+    setColor(Math.random().toString(16).substr(-6));
+  };
+  return { color, generateColor };
+};
 
 function App() {
-  const { color, generateColor } = somewhatUsefulFunctions();
+  const { color, generateColor } = useGenerateRandomColor();
   return (
     <div
       style={{
@@ -16,14 +24,16 @@ function App() {
     >
       <button
         style={{
-          padding: '40px',
-          borderRadius: '10px',
-          backgroundImage: 'linear-gradient(to top, #a8edea 0%, #fed6e3 100%)',
+          padding: '50px',
+          borderRadius: '1000px',
+          backgroundImage:
+            'linear-gradient(to top, #' + color + ' 0%, #FFFFFF 80%)',
           fontSize: 'larger',
         }}
         onClick={generateColor}
       >
-        Generate
+        Generate <br />
+        {'#' + color}
       </button>
     </div>
   );
