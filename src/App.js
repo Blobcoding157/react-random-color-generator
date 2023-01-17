@@ -45,9 +45,8 @@ const RandomColor = () => {
         }}
       >
         Generate
-        <br />
-        {color}
       </button>
+      Generated Color: {color}
     </div>
   );
 };
